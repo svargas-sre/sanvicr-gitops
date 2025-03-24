@@ -25,7 +25,7 @@ spec:
         - name: MEMORY
           value: "2G"
         - name: SEED
-          value: 4345780722922711710
+          value: "4345780722922711710"
         ports:
         - containerPort: 25565
           name: minecraft
