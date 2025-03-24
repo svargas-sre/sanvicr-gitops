@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-apps
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
+    targetRevision: HEAD
+    path: apps  # Where I manage all apps thru argocd
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
