@@ -7,11 +7,15 @@ spec:
   source:
     repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
     targetRevision: HEAD
-    path: apps/minecraft  # Aquí estarán los manifests del server de Minecraft
+    path: apps/minecraft  # Minecraft manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: minecraft
+  
   syncPolicy:
+    syncOptions:
+    - CreateNamespaces=true
+
     automated:
       prune: true
       selfHeal: true
