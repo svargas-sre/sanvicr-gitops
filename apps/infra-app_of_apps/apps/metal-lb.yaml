@@ -8,7 +8,7 @@ spec:
   sources:
     - chart: metallb
       repoURL: 'https://metallb.github.io/metallb'
-      targetRevision: 0.4.19
+      targetRevision: 0.14.9
       helm:
         valueFiles:
           - $values/apps/infra-app_of_apps/apps/metallb/values.yaml
