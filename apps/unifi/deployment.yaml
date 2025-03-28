@@ -20,7 +20,7 @@ spec:
             claimName: unifi
       containers:
         - name: unifi-controller
-          image: jacoalberty/unifi:v9.0
+          image: jacobalberty/unifi:v9.0
           ports:
             - containerPort: 3478
               protocol: UDP 
