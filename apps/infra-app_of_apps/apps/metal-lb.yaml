@@ -5,10 +5,16 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
-    targetRevision: main
-    path: apps/infra-app_of_apps/apps/metallb
+  sources:
+    - chart: metallb
+      repoURL: 'https://metallb.github.io/metallb'
+      targetRevision: 0.4.19
+      helm:
+        valueFiles:
+          - $values/apps/infra-app_of_apps/apps/metallb/values.yaml
+    - repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
+      targetRevision: HEAD
+      ref: values
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
