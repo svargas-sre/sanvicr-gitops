@@ -22,4 +22,10 @@ spec:
     automated:
       prune: true
       selfHeal: true
+  ignoreDifferences:
+    - group: metallb.io
+      kind: BGPPeer
+      jsonPointers:
+        - /status
+
 
