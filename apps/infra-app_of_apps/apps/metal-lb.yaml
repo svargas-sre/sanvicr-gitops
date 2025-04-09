@@ -12,7 +12,7 @@ spec:
       helm:
         valueFiles:
           - $values/apps/infra-app_of_apps/apps/metallb/values.yaml
-    - repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
+    - repoURL: 'https://github.com/svargas-sre/sanvicr-gitops'
       targetRevision: HEAD
       ref: values
   destination:
@@ -22,10 +22,6 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  ignoreDifferences:
-    - group: metallb.io
-      kind: BGPPeer
-      jsonPointers:
-        - /status
+  
 
 
