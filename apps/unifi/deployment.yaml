@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: unifi-controller  # <-- Coincide con los labels abajo
+      app: unifi-controller  # <-- 
   template:
     metadata:
       labels:
-        app: unifi-controller  # <-- Debe coincidir con matchLabels
+        app: unifi-controller  # <--
     spec:
       nodeSelector:
-        kubernetes.io/hostname: gandalfgrid02  # <-- Indentación corregida
+        kubernetes.io/hostname: gandalfgrid01  # <-- Asigning node cluster
       volumes:
         - name: unifi-storage
           persistentVolumeClaim:
