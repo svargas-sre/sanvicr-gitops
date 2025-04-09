@@ -9,13 +9,12 @@ spec:
     - chart: metallb
       repoURL: 'https://metallb.github.io/metallb'
       targetRevision: 0.14.9
-      helm:
-        valueFiles:
-          - $values/apps/infra-app_of_apps/apps/metallb/values.yaml
-          - $values/apps/infra-app_of_apps/apps/metallb/advertisement.yaml
-    - repoURL: 'https://github.com/svargas-sre/sanvicr-gitops'
+    - repoURL: https://github.com/svargas-sre/sanvicr-gitops.git
       targetRevision: HEAD
-      ref: values
+      path: apps/infra-app_of_apps/apps/metallb/config
+      directory:
+        recurse: true
+        
   destination:
     server: https://kubernetes.default.svc
     namespace: metallb-system
