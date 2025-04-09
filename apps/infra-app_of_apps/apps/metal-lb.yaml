@@ -12,6 +12,7 @@ spec:
       helm:
         valueFiles:
           - $values/apps/infra-app_of_apps/apps/metallb/values.yaml
+          - $values/apps/infra-app_of_apps/apps/metallb/advertisement.yaml
     - repoURL: 'https://github.com/svargas-sre/sanvicr-gitops'
       targetRevision: HEAD
       ref: values

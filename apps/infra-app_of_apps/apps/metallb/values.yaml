@@ -1,6 +1,8 @@
-configInline:
-  address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-        - 172.20.1.18-172.20.1.22
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: default-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 172.20.1.18-172.20.1.22
