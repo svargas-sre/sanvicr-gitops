@@ -25,9 +25,9 @@ spec:
         - name: MEMORY
           value: "4G"
         - name: TYPE
-          value: "NEOFORGE"
+          value: "FORGE"
         - name: VERSION 
-          value: "1.21.1"
+          value: "1.20.1"
         ports:
         - containerPort: 25565
           name: minecraft
