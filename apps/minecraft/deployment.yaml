@@ -24,8 +24,8 @@ spec:
           value: "TRUE"
         - name: MEMORY
           value: "7G"
-        - name: TYPE
-          value: "FORGE"
+#        - name: TYPE
+#          value: "FORGE"
         - name: VERSION 
           value: "1.20.1"
         ports:
