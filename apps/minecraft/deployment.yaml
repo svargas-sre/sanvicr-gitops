@@ -25,9 +25,9 @@ spec:
         - name: MEMORY
           value: "2G"
         - name: TYPE
-          value: "FORGE"
+          value: "FABRIC"
         - name: VERSION 
-          value: "1.21"
+          value: "1.21.1"
         ports:
         - containerPort: 25565
           name: minecraft
