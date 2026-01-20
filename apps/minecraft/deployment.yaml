@@ -14,20 +14,20 @@ spec:
       labels:
         app: minecraft
     spec:
-      nodeSelector:
-        kubernetes.io/hostname: gandalfgrid02
+   #   nodeSelector:
+    #    kubernetes.io/hostname: gandalfgrid02
       containers:
       - name: minecraft
-        image: itzg/minecraft-server:latest
+        image: itzg/minecraft-server:java21
         env:
         - name: EULA
           value: "TRUE"
         - name: MEMORY
-          value: "7G"
+          value: "2G"
 #        - name: TYPE
 #          value: "FORGE"
         - name: VERSION 
-          value: "1.20.1"
+          value: "1.21"
         ports:
         - containerPort: 25565
           name: minecraft
