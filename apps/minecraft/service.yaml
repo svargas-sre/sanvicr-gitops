@@ -3,12 +3,13 @@ kind: Service
 metadata:
   name: minecraft-lb
 spec:
+  type: LoadBalancer
+  LoadBalancerIP: 172.20.50.10 
   selector:
     app: minecraft
   ports:
-    - protocol: TCP
-      name: minecraft
+    - name: minecraft
+      protocol: TCP
       port: 25565
       targetPort: 25565
-  type: LoadBalancer
-  LoadBalancerIP: 172.20.50.10 
+  
