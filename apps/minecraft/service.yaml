@@ -9,6 +9,7 @@ spec:
   loadBalancerIP: 172.20.50.110
   selector:
     app: minecraft
+    instance: mc-1
   ports:
     - name: minecraft
       protocol: TCP

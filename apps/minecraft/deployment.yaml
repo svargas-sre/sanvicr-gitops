@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: minecraft
+        instance: mc-1
     spec:
    #   nodeSelector:
     #    kubernetes.io/hostname: gandalfgrid02
