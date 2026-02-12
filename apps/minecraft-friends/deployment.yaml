@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: minecraft-server
+  labels:
+    app: minecraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: minecraft
+  template:
+    metadata:
+      labels:
+        app: minecraft
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: k8s-cp2
+      containers:
+      - name: minecraft
+        image: itzg/minecraft-server:java21
+        env:
+        - name: EULA
+          value: "TRUE"
+        - name: MEMORY
+          value: "8G"
+        - name: TYPE
+          value: "FABRIC"
+        - name: VERSION 
+          value: "1.21.1"
+        - name: ENABLE_COMMAND_BLOCK
+          value: "true"  
+        ports:
+        - containerPort: 25565
+          name: minecraft
+        volumeMounts:
+        - mountPath: /data
+          name: mc-storage
+      volumes:
+      - name: mc-storage
+        persistentVolumeClaim:
+          claimName: minecraft-pvc-friends
