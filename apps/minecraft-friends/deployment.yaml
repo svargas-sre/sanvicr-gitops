@@ -6,7 +6,7 @@ metadata:
     app: minecraft
     instance: mc-2
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: minecraft
