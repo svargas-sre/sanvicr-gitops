@@ -4,6 +4,7 @@ metadata:
   name: minecraft-friends-server
   labels:
     app: minecraft
+    instance: mc-2
 spec:
   replicas: 1
   selector:
