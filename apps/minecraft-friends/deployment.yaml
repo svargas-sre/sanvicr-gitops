@@ -22,6 +22,8 @@ spec:
       - name: minecraft
         image: itzg/minecraft-server:java21
         env:
+        - name: TZ
+          value: "America/Costa_Rica"
         - name: EULA
           value: "TRUE"
         - name: MEMORY
@@ -42,6 +44,8 @@ spec:
       - name: minecraft-exporter
         image: sevargas07/minecraft-exporter:0.1.0
         env:
+        - name: TZ
+          value: "America/Costa_Rica"
         - name: RCON_HOST
           value: "127.0.0.5"
         - name: RCON_PORT
