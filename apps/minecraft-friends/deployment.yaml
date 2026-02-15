@@ -38,6 +38,27 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: mc-storage
+
+      - name: minecraft-exporter
+        image: sevargas07/minecraft-exporter:0.1.0
+        env:
+        - name: RCON_HOST
+          value: "127.0.0.5"
+        - name: RCON_PORT
+          value: 25575
+        - name: RCON_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mc-rcon
+              key: password
+        - name: EXPORTER_PORT
+          value: "8000"
+        - name: INTERVAL_SECONDS
+          value: "10" 
+        ports:
+        - containerPort: 8000
+          name: metrics
+          
       volumes:
       - name: mc-storage
         persistentVolumeClaim:
