@@ -26,6 +26,10 @@ spec:
           value: "America/Costa_Rica"
         - name: EULA
           value: "TRUE"
+        - name: RCON_PASSWORD
+          secretKeyRef:
+            name: mc-rcon
+            key: password
         - name: MEMORY
           value: "8G"
         - name: TYPE
