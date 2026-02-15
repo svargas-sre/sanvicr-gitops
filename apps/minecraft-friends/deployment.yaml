@@ -27,9 +27,10 @@ spec:
         - name: EULA
           value: "TRUE"
         - name: RCON_PASSWORD
-          secretKeyRef:
-            name: mc-rcon
-            key: password
+          valueFrom:
+            secretKeyRef:
+              name: mc-rcon
+              key: password
         - name: MEMORY
           value: "8G"
         - name: TYPE
