@@ -47,7 +47,7 @@ spec:
         - name: TZ
           value: "America/Costa_Rica"
         - name: RCON_HOST
-          value: "127.0.0.5"
+          value: "127.0.0.1"
         - name: RCON_PORT
           value: "25575"
         - name: RCON_PASSWORD
