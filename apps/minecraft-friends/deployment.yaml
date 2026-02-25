@@ -36,7 +36,7 @@ spec:
               name: mc-rcon
               key: password
         - name: MEMORY
-          value: "7G"
+          value: "6G"
         - name: TYPE
           value: "FABRIC"
         - name: VERSION 
@@ -52,7 +52,7 @@ spec:
         resources:
           requests:
             cpu: "2"
-            memory: "6Gi"
+            memory: "7Gi"
         readinessProbe:
           tcpSocket:
             port: 25565
