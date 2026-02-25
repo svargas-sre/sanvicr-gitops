@@ -36,7 +36,7 @@ spec:
               name: mc-rcon
               key: password
         - name: MEMORY
-          value: "8G"
+          value: "7G"
         - name: TYPE
           value: "FABRIC"
         - name: VERSION 
@@ -49,6 +49,20 @@ spec:
         volumeMounts:
         - mountPath: /data
           name: mc-storage
+        resources:
+          requests:
+            cpu: "2"
+            memory: "6Gi"
+        readinessProbe:
+          tcpSocket:
+            port: 25565
+          initialDelaySeconds: 120
+          periodSeconds: 10
+        startupProbe:
+          tcpSocket:
+            port: 25565
+          failureThreshold: 60
+          periodSeconds: 5
 
       - name: minecraft-exporter
         image: sevargas07/minecraft-exporter:0.1.0
