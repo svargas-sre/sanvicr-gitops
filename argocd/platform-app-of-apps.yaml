@@ -1,13 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root-apps
+  name: platform-app-of-apps
+  namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
-    targetRevision: HEAD
-    path: argocd  # Where I manage all apps thru argocd
+    repoURL: https://github.com/svargas-sre/sanvicr-gitops
+    targetRevision: main
+    path: platform/app-of-apps
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
