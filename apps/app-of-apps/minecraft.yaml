@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: 'https://github.com/svargas-sre/sanvicr-gitops.git'
     targetRevision: HEAD
-    path: apps/minecraft-friends  # Minecraft manifests
+    path: apps/minecraft  # Minecraft manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: minecraft
