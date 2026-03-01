@@ -5,7 +5,7 @@ metadata:
   labels:
     app: minecraft
 spec:
-  replicas: 1
+  replicas: 0
   selector:
     matchLabels:
       app: minecraft
@@ -29,8 +29,6 @@ spec:
           value: "FABRIC"
         - name: VERSION 
           value: "1.21.1"
-        - name: ENABLE_COMMAND_BLOCK
-          value: "true"  
         ports:
         - containerPort: 25565
           name: minecraft
