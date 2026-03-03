@@ -1,6 +1,6 @@
 grafana:
   enabled: true
-  adminPassword: "CAMBIA-ESTO"
+  adminPassword: "admin" #Temporal, lo migraré a un secret dentro del k8s
   persistence:
     enabled: true
     storageClassName: longhorn
