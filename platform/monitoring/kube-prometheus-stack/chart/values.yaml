@@ -1,0 +1,98 @@
+grafana:
+  enabled: true
+  adminPassword: "CAMBIA-ESTO"
+  persistence:
+    enabled: true
+    storageClassName: longhorn
+    size: 5Gi
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+  # Para acceso rápido al inicio, usa port-forward. Ingress lo hacemos después.
+
+prometheus:
+  enabled: true
+  prometheusSpec:
+    replicas: 1
+    retention: 7d
+    # OJO: si ves que el PVC crece demasiado, baja a 3d.
+    resources:
+      requests:
+        cpu: 200m
+        memory: 1Gi
+      limits:
+        cpu: "1"
+        memory: 2Gi
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 20Gi
+
+    # Mantén esto apagado para no abrir la admin API
+    enableAdminAPI: false
+
+    # Opcional: si tu cluster es pequeño, baja el scrape global (menos carga).
+    # evaluationInterval: 30s
+    # scrapeInterval: 30s
+
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    replicas: 1
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: longhorn
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+    resources:
+      requests:
+        cpu: 20m
+        memory: 64Mi
+      limits:
+        cpu: 200m
+        memory: 256Mi
+
+# Exporters / métricas base
+kubeStateMetrics:
+  enabled: true
+
+nodeExporter:
+  enabled: true
+
+prometheusOperator:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 200Mi
+    limits:
+      cpu: 300m
+      memory: 500Mi
+
+# Componentes del cluster (kubeadm):
+# Si alguno sale DOWN en Targets, lo afinamos luego (a veces es TLS / endpoints).
+kubeEtcd:
+  enabled: true
+kubeControllerManager:
+  enabled: true
+kubeScheduler:
+  enabled: true
+kubeProxy:
+  enabled: true
+kubelet:
+  enabled: true
+
+# Reglas por defecto: déjalas ON al inicio, pero si te “llueven” alertas,
+# luego afinamos Alertmanager o apagamos algunas rules.
+defaultRules:
+  create: true
