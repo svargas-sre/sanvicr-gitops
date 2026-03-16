@@ -12,17 +12,18 @@ grafana:
     limits:
       cpu: 300m
       memory: 512Mi
+      
   ingress:
     enabled: true
     ingressClassName: nginx
     annotations:
       nginx.ingress.kubernetes.io/ssl-redirect: "true"
     hosts:
-      - grafana.tudominio.com
+      - grafana.sanvicr.com
     tls:
       - secretName: grafana-tls
         hosts:
-          - grafana.tudominio.com
+          - grafana.sanvicr.com
 
 
 prometheus:
