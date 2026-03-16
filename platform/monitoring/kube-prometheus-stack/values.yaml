@@ -12,14 +12,25 @@ grafana:
     limits:
       cpu: 300m
       memory: 512Mi
-  # Para acceso rápido al inicio, usa port-forward. Ingress lo hacemos después.
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    hosts:
+      - grafana.tudominio.com
+    tls:
+      - secretName: grafana-tls
+        hosts:
+          - grafana.tudominio.com
+
 
 prometheus:
   enabled: true
   prometheusSpec:
     replicas: 1
     retention: 7d
-    # OJO: si ves que el PVC crece demasiado, baja a 3d.
+
     resources:
       requests:
         cpu: 200m
@@ -36,13 +47,10 @@ prometheus:
             requests:
               storage: 20Gi
 
-    # Mantén esto apagado para no abrir la admin API
+   
     enableAdminAPI: false
 
-    # Opcional: si tu cluster es pequeño, baja el scrape global (menos carga).
-    # evaluationInterval: 30s
-    # scrapeInterval: 30s
-
+    
 alertmanager:
   enabled: true
   alertmanagerSpec:
@@ -80,7 +88,7 @@ prometheusOperator:
       memory: 500Mi
 
 # Componentes del cluster (kubeadm):
-# Si alguno sale DOWN en Targets, lo afinamos luego (a veces es TLS / endpoints).
+
 kubeEtcd:
   enabled: true
 kubeControllerManager:
@@ -92,7 +100,6 @@ kubeProxy:
 kubelet:
   enabled: true
 
-# Reglas por defecto: déjalas ON al inicio, pero si te “llueven” alertas,
-# luego afinamos Alertmanager o apagamos algunas rules.
+
 defaultRules:
   create: true
