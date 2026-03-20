@@ -1,0 +1,96 @@
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi
+
+# Config mínima para arrancar con SNMP v2c
+# Ojo: "public" es ejemplo. Cámbialo por tu community real read-only.
+config: |-
+  auths:
+    public_v2:
+      community: public
+      version: 2
+
+  modules:
+    if_mib:
+      walk:
+        - 1.3.6.1.2.1.1.3
+        - 1.3.6.1.2.1.2
+        - 1.3.6.1.2.1.31.1.1
+        - 1.3.6.1.2.1.31.1.1.1.18
+
+service:
+  type: ClusterIP
+  port: 9116
+
+serviceMonitor:
+  enabled: true
+  path: /snmp
+  interval: 60s
+  scrapeTimeout: 30s
+
+  # Default module/auth para los targets
+  module:
+    - if_mib
+  auth:
+    - public_v2
+
+  # Este label debe coincidir con el selector de ServiceMonitors
+  # de tu kube-prometheus-stack. En muchísimos setups es esto:
+  labels:
+    release: kube-prometheus-stack
+
+  # Un ServiceMonitor target por equipo
+  params:
+    - name: fortigate
+      target: 172.20.1.1
+      module:
+        - if_mib
+      auth:
+        - public_v2
+      labels:
+        device: fortigate
+        vendor: fortinet
+        site: homelab
+
+    - name: pfsense
+      target: 10.48.0.2
+      module:
+        - if_mib
+      auth:
+        - public_v2
+      labels:
+        device: pfsense
+        vendor: netgate
+        site: sanvicente
+
+    - name: core-switch-sanvicente
+      target: 192.168.1.10
+      module:
+        - if_mib
+      auth:
+        - public_v2
+      labels:
+        device: core-switch-sanvicente
+        vendor: unifi
+        site: sanvicente
+
+  # Mantén esto vacío por ahora para no complicarte
+  relabelings: []
+  additionalMetricsRelabels: {}
+  additionalMetricsRelabelConfigs: []
+
+  selfMonitor:
+    enabled: true
+    interval: 60s
+    scrapeTimeout: 30s
+    labels:
+      release: kube-prometheus-stack
