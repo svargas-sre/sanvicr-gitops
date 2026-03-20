@@ -57,6 +57,7 @@ serviceMonitor:
         device: fortigate
         vendor: fortinet
         site: homelab
+        release: monitoring-app-of-apps
 
     - name: pfsense
       target: 10.48.0.2
@@ -68,6 +69,7 @@ serviceMonitor:
         device: pfsense
         vendor: netgate
         site: sanvicente
+        release: monitoring-app-of-apps
 
     - name: core-switch-sanvicente
       target: 192.168.1.10
@@ -79,6 +81,7 @@ serviceMonitor:
         device: core-switch-sanvicente
         vendor: unifi
         site: sanvicente
+        release: monitoring-app-of-apps
 
  
   relabelings: []
