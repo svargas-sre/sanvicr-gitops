@@ -11,8 +11,7 @@ resources:
     cpu: 300m
     memory: 256Mi
 
-# Config mínima para arrancar con SNMP v2c
-# Ojo: "public" es ejemplo. Cámbialo por tu community real read-only.
+
 config: |-
   auths:
     public_v2:
@@ -43,10 +42,8 @@ serviceMonitor:
   auth:
     - public_v2
 
-  # Este label debe coincidir con el selector de ServiceMonitors
-  # de tu kube-prometheus-stack. En muchísimos setups es esto:
   labels:
-    release: kube-prometheus-stack
+    release: monitoring-app-of-apps
 
   # Un ServiceMonitor target por equipo
   params:
@@ -83,7 +80,7 @@ serviceMonitor:
         vendor: unifi
         site: sanvicente
 
-  # Mantén esto vacío por ahora para no complicarte
+ 
   relabelings: []
   additionalMetricsRelabels: {}
   additionalMetricsRelabelConfigs: []
@@ -93,4 +90,4 @@ serviceMonitor:
     interval: 60s
     scrapeTimeout: 30s
     labels:
-      release: kube-prometheus-stack
+      release: monitoring-app-of-apps
