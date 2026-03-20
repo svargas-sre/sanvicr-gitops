@@ -22,7 +22,7 @@ serviceMonitor:
   enabled: true
   path: /snmp
   interval: 15s
-  scrapeTimeout: 30s
+  scrapeTimeout: 10s
 
   # Default module/auth para los targets
   module:
