@@ -11,6 +11,14 @@ spec:
     metadata:
       labels:
         app: unifi-controller  # <--
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1Gi"
+      limits:
+        cpu: "2"
+        memory: "2Gi"
+    
     spec:
 #      nodeSelector:
 #        kubernetes.io/hostname: gandalfgrid02  # <-- Asigning node cluster
@@ -38,3 +46,4 @@ spec:
             - name: unifi-storage
               mountPath: /unifi
               subPath: unifi
+
