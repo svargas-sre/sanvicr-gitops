@@ -13,8 +13,8 @@ spec:
         app: unifi-controller  # <--
     
     spec:
-#      nodeSelector:
-#        kubernetes.io/hostname: gandalfgrid02  # <-- Asigning node cluster
+      nodeSelector:
+        kubernetes.io/hostname: k8s-cp3  # <-- Asigning node cluster
       volumes:
         - name: unifi-storage
           persistentVolumeClaim:
