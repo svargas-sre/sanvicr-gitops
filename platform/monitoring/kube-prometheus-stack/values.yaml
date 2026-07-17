@@ -2,6 +2,25 @@ kube-prometheus-stack:
   grafana:
     enabled: true
     adminPassword: "admin" # temporal
+    envFromSecret: grafana-authentik
+
+    grafana.ini:
+      server:
+        root_url: "https://grafana.sanvicr.com"
+
+      auth.generic_oauth:
+        enabled: true
+        name: "Authentik"
+        allow_sign_up: true
+        auto_login: false
+        client_id: "TUhpWEAr4cKjSjpMVsNnHNHl9PHRKEpcjjkfsdQs"
+        client_secret: "$__env{GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}"
+        scopes: "openid profile email"
+        auth_url: "https://authentik.int.sanvicr.com/application/o/authorize/"
+        token_url: "https://authentik.int.sanvicr.com/application/o/token/"
+        api_url: "https://authentik.int.sanvicr.com/application/o/userinfo/"
+        use_pkce: true
+
     persistence:
       enabled: true
       storageClassName: longhorn
