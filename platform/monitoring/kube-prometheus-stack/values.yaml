@@ -9,7 +9,7 @@ kube-prometheus-stack:
         root_url: "https://grafana.sanvicr.com"
 
       auth.generic_oauth:
-        tls_skip_verify_insecure: true
+        tls_skip_verify_insecure: false
         enabled: true
         name: "Authentik"
         allow_sign_up: true
@@ -17,10 +17,17 @@ kube-prometheus-stack:
         client_id: "TUhpWEAr4cKjSjpMVsNnHNHl9PHRKEpcjjkfsdQs"
         client_secret: "$__env{GF_AUTH_GENERIC_OAUTH_CLIENT_SECRET}"
         scopes: "openid profile email"
-        auth_url: "https://authentik.int.sanvicr.com:9443/application/o/authorize/"
-        token_url: "https://authentik.int.sanvicr.com:9443/application/o/token/"
-        api_url: "https://authentik.int.sanvicr.com:9443/application/o/userinfo/"
+        auth_url: "https://auth.sanvicr.com/application/o/authorize/"
+        token_url: "https://auth.sanvicr.com/application/o/token/"
+        api_url: "https://auth.sanvicr.com/application/o/userinfo/"
         use_pkce: true
+
+        login_attribute_path: preferred_username
+        email_attribute_path: email
+        name_attribute_path: name
+
+        role_attribute_path: "contains(entitlements[*], 'NetworkAdministrator') && 'Admin' || 'Viewer'"
+        role_attribute_strict: false
 
     persistence:
       enabled: true
