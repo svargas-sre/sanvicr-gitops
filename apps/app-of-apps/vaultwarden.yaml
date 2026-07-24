@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/svargas-sre/sanvicr-gitops.git
+    targetRevision: HEAD
+    path: apps/vaultwarden
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: vaultwarden
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

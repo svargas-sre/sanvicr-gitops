@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vaultwarden
+  labels:
+    app: vaultwarden
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: vaultwarden
+  template:
+    metadata:
+      labels:
+        app: vaultwarden
+    spec:
+      automountServiceAccountToken: false
+      containers:
+        - name: vaultwarden
+          image: ghcr.io/dani-garcia/vaultwarden:1.36.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DOMAIN
+              value: https://vaultwarden.sanvicr.com
+            # Disable this immediately after creating the initial account.
+            - name: SIGNUPS_ALLOWED
+              value: "true"
+            - name: TZ
+              value: America/Costa_Rica
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+            - name: vaultwarden-storage
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          readinessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 3
+            failureThreshold: 3
+          livenessProbe:
+            tcpSocket:
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 3
+            failureThreshold: 3
+          securityContext:
+            allowPrivilegeEscalation: false
+      volumes:
+        - name: vaultwarden-storage
+          persistentVolumeClaim:
+            claimName: vaultwarden-pvc
