@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: vaultwarden
-          image: ghcr.io/dani-garcia/vaultwarden:1.36.0
+          image: ghcr.io/dani-garcia/vaultwarden:1.37.0
           imagePullPolicy: IfNotPresent
           env:
             - name: DOMAIN
