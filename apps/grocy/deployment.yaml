@@ -22,8 +22,8 @@ spec:
           type: RuntimeDefault
       containers:
         - name: grocy
-          image: lscr.io/linuxserver/grocy:latest
-          imagePullPolicy: Always
+          image: lscr.io/linuxserver/grocy:4.6.0
+          imagePullPolicy: IfNotPresent
           env:
             - name: PUID
               value: "1000"
