@@ -94,17 +94,26 @@ spec:
             httpGet:
               path: /healthz
               port: http
+              httpHeaders:
+                - name: Host
+                  value: localhost:41243
             failureThreshold: 30
             periodSeconds: 2
           readinessProbe:
             httpGet:
               path: /healthz
               port: http
+              httpHeaders:
+                - name: Host
+                  value: localhost:41243
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: /healthz
               port: http
+              httpHeaders:
+                - name: Host
+                  value: localhost:41243
             periodSeconds: 30
           resources:
             requests:
