@@ -57,10 +57,7 @@ spec:
                   name: proximo-mcp
                   key: api-base-url
             - name: PROXIMO_NODE
-              valueFrom:
-                secretKeyRef:
-                  name: proximo-mcp
-                  key: node
+              value: deimos
             - name: PROXIMO_FINGERPRINT
               valueFrom:
                 secretKeyRef:

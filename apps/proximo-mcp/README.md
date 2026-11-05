@@ -14,7 +14,6 @@ El Deployment espera un Secret llamado `proximo-mcp` en el namespace `homelab-mc
 | Clave | Contenido |
 | --- | --- |
 | `api-base-url` | `https://HOST:8006/api2/json` |
-| `node` | Nombre del nodo predeterminado |
 | `fingerprint` | Huella SHA-256 del certificado del nodo |
 | `pve-token` | `USUARIO@REALM!TOKEN_ID=TOKEN_SECRET` |
 | `mcp-bearer-token` | Token aleatorio utilizado por el cliente MCP |
