@@ -3,6 +3,7 @@
 Despliegue minimo de Proximo para acceder a Proxmox VE mediante MCP Streamable HTTP.
 
 - Endpoint interno: `http://proximo-mcp.homelab-mcp.svc.cluster.local:41243/mcp`
+- Endpoint mediante el proxy externo: `https://mcp.sanvicr.com/mcp`
 - Endpoint local durante una prueba con port-forward: `http://127.0.0.1:41243/mcp`
 - La imagen esta fijada a `ghcr.io/john-broadway/proximo:0.44.0`.
 - El acceso dentro de LXC (`PROXIMO_ENABLE_EXEC`) y mediante QEMU Guest Agent (`PROXIMO_ENABLE_AGENT`) esta desactivado.
@@ -19,6 +20,8 @@ El Deployment espera un Secret llamado `proximo-mcp` en el namespace `homelab-mc
 | `mcp-bearer-token` | Token aleatorio utilizado por el cliente MCP |
 
 El Secret se crea manualmente con `kubectl` desde un archivo temporal fuera de este repositorio. No se debe agregar el archivo con valores reales a Git.
+
+El proxy externo termina TLS y reenvia hacia ingress-nginx por HTTP puerto 80, preservando `Host: mcp.sanvicr.com`. Dentro del cluster, el Ingress envia la solicitud al Service `proximo-mcp` en el puerto 41243.
 
 Una vez desplegado, la prueba mas sencilla desde una computadora con acceso al API de Kubernetes sera:
 

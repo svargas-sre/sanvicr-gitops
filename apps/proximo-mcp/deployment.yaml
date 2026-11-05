@@ -85,7 +85,7 @@ spec:
             - name: PROXIMO_MCP_HTTP_TOKEN_FILE
               value: /run/proximo/mcp-bearer-token
             - name: PROXIMO_MCP_HTTP_ALLOWED_HOSTS
-              value: proximo-mcp,proximo-mcp:41243,proximo-mcp.homelab-mcp.svc,proximo-mcp.homelab-mcp.svc:41243,proximo-mcp.homelab-mcp.svc.cluster.local,proximo-mcp.homelab-mcp.svc.cluster.local:41243,localhost,localhost:41243,127.0.0.1,127.0.0.1:41243
+              value: proximo-mcp,proximo-mcp:41243,proximo-mcp.homelab-mcp.svc,proximo-mcp.homelab-mcp.svc:41243,proximo-mcp.homelab-mcp.svc.cluster.local,proximo-mcp.homelab-mcp.svc.cluster.local:41243,mcp.sanvicr.com,mcp.sanvicr.com:80,mcp.sanvicr.com:443,localhost,localhost:41243,127.0.0.1,127.0.0.1:41243
           ports:
             - name: http
               containerPort: 41243
